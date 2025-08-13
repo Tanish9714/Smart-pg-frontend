@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import Modal from "../components/ui/Modal";
-import FormDialog from "../components/ui/FormDialog";
+import DashboardContent from "../components/dashboard/DashboardContent";
 
 export default function Dashboard() {
   return (
-    <div>
-      <FormDialog />
+    <div className="w-full h-full bg-[#f7f5f4] flex flex-col">
+      <DashboardContent/>
     </div>
   );
 }
