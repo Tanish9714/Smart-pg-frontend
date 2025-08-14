@@ -70,19 +70,35 @@ const DashboardContent = () => {
     },
   ];
 
+  const tabWidth = 100 / tabs.length;
+  const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
+  const extraOffsetLeft = activeTab === "breakfast" ? 4 : 0;
+  const extraOffsetRight = activeTab === "dinner" ? 4 : 0;
+
   return (
-    <div className="dashboard">
+    <div className="dashboard flex flex-col items-center p-4 ">
       {/* Tabs */}
-      <div className="dashboard-tabs">
+      <div className="relative bg-white rounded-lg p-1 flex w-[500px] shadow-sm">
+        <div
+          className="absolute top-1 bottom-1 bg-[#e3f2fd] rounded-md shadow-sm transition-all duration-300 ease-out"
+          style={{
+            left: `calc(${activeIndex * tabWidth}% + ${extraOffsetLeft}px)`,
+            width: `calc(${tabWidth}% - ${
+              extraOffsetRight + extraOffsetLeft
+            }px)`,
+          }}
+        />
+
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
             onClick={() => setActiveTab(tab.id)}
-            style={{
-              borderBottomColor:
-                activeTab === tab.id ? tab.color : "transparent",
-            }}
+            className={`relative z-10 flex-1 py-2 text-sm font-medium rounded-md transition-colors duration-200
+              ${
+                activeTab === tab.id
+                  ? "text-gray-900"
+                  : "text-gray-600 hover:text-gray-800"
+              }`}
           >
             {tab.label}
           </button>
